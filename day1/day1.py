@@ -7,24 +7,25 @@ def main():
     data = format_AOC_day1(target_file)
 
     # create a single list of left and right values
-    left_list = []
-    for pair in data:
-        left_list.append(pair[0])
-    sorted_left_list = sorted(left_list)
+    sorted_left_list = split_sort(data, 0)
 
-    right_list = []
-    for pair in data:
-        right_list.append(pair[1])
-    sorted_right_list = sorted(right_list)
+    sorted_right_list = split_sort(data, 1)
 
     # create a list of the differences between the left and right sorted list
     diff_list = abs_diff(sorted_left_list, sorted_right_list)
 
     # sum the list and print/return the answer
     answer = sum(diff_list)
-    print(answer)
-    return answer
-    
+    print("part one: ", answer)
+   
+    # day 1 part 2 compare left list to right list as outlined in problem 
+    sim_list = []
+    for i in sorted_left_list:
+        sim_list.append(sim_func(i, sorted_right_list))
+
+    # sum the similarity list
+    answer2 = sum(sim_list)
+    print("part two: ", answer2)
 
 # import datat and format it into a list of lists
 def format_AOC_day1(target_file):
@@ -54,7 +55,32 @@ def abs_diff(left, right):
         diff_list.append(abs(int(left[i]) - int(right[i])))
     return diff_list
 
+# takes a list of pairs (eg. [[1, 2], [3, 4], [5,6]]) and a 0 or 1 for left or right. outputs a sorted list of the desired side.
+def split_sort(data, side):
+    lst = []
+    for pair in data:
+        lst.append(pair[side])
+    sorted_list = sorted(lst)
+    return sorted_list
 
+# apply the similarity comparison from problem 2
+def sim_func(i, lst):
+    return (int(i) * lst.count(i))
+
+
+main
+
+
+
+main
+
+
+
+main
+
+
+
+main
 
 
 
