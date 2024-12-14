@@ -1,10 +1,13 @@
-# advent of code day two part one
+# set itteration global variable
+global itr
+itr = 0
 
+# advent of code day two part one
 def main():
 
     # retrieve data
     data = format_AOC_day2(input("input file name: "))
-
+    
     # sum the safe list items
     safe = 0
     for level in data:
@@ -12,6 +15,13 @@ def main():
             safe += 1
 
     print(safe)
+    
+    # sum the safe list items
+    safe2 = 0
+    for level in data:
+        if safe_test2(level):
+            safe2 += 1
+
 
 # import datat and format it into a list of lists
 def format_AOC_day2(target_file):
@@ -64,5 +74,23 @@ def asn_safe_test(level):
             return False
     return True
           
+# safe test for part 2
+def safe_test(level):
+    itr += 1
+    for i in level:
+        if 0 < abs(level[i] - level[i + 1]) <= 3:
+            itr = 0
+            return True
+        elif safe_test(level.remove(level[i])) and itr == 1:
+            itr = 0
+            return True
+        elif safe_test(level.remove(level[i + 1])) and itr == 2:
+            itr = 0
+            return True
+        else:
+            itr = 0
+            False
+
+
 
 main()
