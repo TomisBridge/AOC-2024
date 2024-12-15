@@ -1,9 +1,9 @@
-# set itteration global variable
-global itr
-itr = 0
-
 # advent of code day two part one
 def main():
+
+    # set itteration counter variable for the safe2 function
+    global itr
+    itr = 0
 
     # retrieve data
     data = format_AOC_day2(input("input file name: "))
@@ -19,7 +19,7 @@ def main():
     # sum the safe list items
     safe2 = 0
     for level in data:
-        if safe_test2(level):
+        if safe_test2(level, []):
             safe2 += 1
 
 
@@ -54,42 +54,54 @@ def format_AOC_day2(target_file):
 # hand off to decending or acending functions
 def safe_test(level):
     if level[0] - level[1] > 0:
-        return dsn_safe_test(level)
+        return ord_safe_test(level, 0, 1)
     elif level[0] - level[1] < 0:
-        return asn_safe_test(level)
+        return ord_safe_test(level, 1, 0)
     else:
         False
 
 # safe test for descending sets
-def dsn_safe_test(level):
+# for part two add itterations for removed numbers
+def ord_safe_test(level, asn, dsn):
     for i in range(len(level) - 1):
-        if not(0 < level[i] - level[i + 1] <= 3):
+        if not(0 < level[i + asn] - level[i + dsn] <= 3):
             return False
     return True
 
-# safe test for ascending sets
-def asn_safe_test(level):
-    for i in range(len(level) - 1):
-        if not(0 < level[i + 1] - level[i] <= 3):
-            return False
-    return True
-          
-# safe test for part 2
-def safe_test(level):
+# test first two numbers in list for safety
+def safe_test2(level, level_mod):
+    global itr
     itr += 1
-    for i in level:
-        if 0 < abs(level[i] - level[i + 1]) <= 3:
-            itr = 0
-            return True
-        elif safe_test(level.remove(level[i])) and itr == 1:
-            itr = 0
-            return True
-        elif safe_test(level.remove(level[i + 1])) and itr == 2:
-            itr = 0
-            return True
-        else:
-            itr = 0
-            False
+    print("itr: ", itr, ", ", level, ", ", level_mod)
+    # if first itteration
+    if not(safe2(level)) and itr == 1:
+        level_mod = level
+        level_mod.remove(level[0])
+        itr += 1
+        safe_test2(level, level_mod)
+
+    # if second itteration
+    elif not(safe2(level_mod)) and itr == 2 or 3:
+        level_mod = level
+        level_mod.remove(level[1])
+        print(level, level_mod)
+        itr += 1
+        safe_test2(level, level_mod)
+
+    # if more then three itterations then return false
+    elif itr > 3:
+        return False
+
+    # if first two numbers pass acending and decending functions will still work
+    else:
+        safe_test(level)
+
+
+# safe test for part 2
+def safe2(level):
+    if not(0 < abs(level[0] - level[1]) <= 3):
+        return False
+    return True
 
 
 
