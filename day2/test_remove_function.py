@@ -19,3 +19,10 @@ print(original, modified)
 
 map(+ 1, modified)
 print(original, modified)
+
+modified.pop(4 + 1)
+print(modified)
+
+modified.pop()
+print(modified)
+
