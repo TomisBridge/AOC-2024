@@ -5,21 +5,12 @@ def main():
     data = format_AOC_day3(input("input name: "))
     print(data)
 
-    allow_char = "mul()0123456789, "
+    data_list = data.replace("m", " m").split(" ")
 
-    allow_data = ""
-    for char in data:
-        if char in allow_char:
-            allow_data += char
-
-    print(allow_data)
-
-    allow_char_list = allow_data.replace("m", " m").split(" ")
-
-    print(allow_char_list)
+    print(data_list)
 
     filtered = []
-    for item in allow_char_list:
+    for item in data_list:
         print(item)
         result = re.match(r"mul\([0-9]{1,3},[0-9]{1,3}\)", item)
         if result != None:
