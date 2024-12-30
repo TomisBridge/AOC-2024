@@ -1,17 +1,16 @@
 def main():
 
-	test_list = [['a1', 'a2', 'a3'], ['b1', 'b2', 'b3'], ['c1', 'c2', 'c3']]
+    test_list = [['a1', 'a2', 'a3'], ['b1', 'b2', 'b3'], ['c1', 'c2', 'c3']]
 
-	print(test_list)
+    x = int(input("input x: "))
+    y = int(input("input y: "))
 
-	print(test_list[1][2])
+    seround = serounding(test_list, x, y)
 
-	x = int(input("input x: "))
-	y = int(input("input y: "))
+    print(seround)
 
-	seround = serounding(test_list, x, y)
-	
-	print(seround)
+    test = list(range(len(seround)))
+    print(test)
 
 def serounding(test_list, x, y):
 	serounding = []
@@ -19,7 +18,6 @@ def serounding(test_list, x, y):
 		one = ( x - 1 ) + i
 		for j in range(3):
 			two = ( y - 1 ) + j
-			print(one, two)
 			if 0 <= one <= len(test_list) - 1 and 0 <= two <= len(test_list[x]) - 1:
 				serounding.append([one, two, test_list[one][two]]) 
 	return serounding
