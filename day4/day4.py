@@ -1,5 +1,3 @@
-#import pdb
-
 # set global target and counter variables
 global counter
 counter = 0
@@ -9,7 +7,6 @@ target = ['X', 'M', 'A', 'S']
 def main():
 
     # import data specified file
-#    breakpoint()
     target_file = input("input: ")
     data = format_AOC(target_file)
 
@@ -29,7 +26,6 @@ def main():
     # search all combinations char and search for X's
     for i in range(len(data_list)):
         for j in range(len(data_list[i])):
-#            breakpoint()
             xmas_count += search(data_list, i, j)
             print(i, j, xmas_count)
 
@@ -40,7 +36,6 @@ def format_AOC(target_file):
 
     #import data and store it in data as a str
     my_file = open(target_file, "r")
-    data = []
     data = my_file.read()
 
 
@@ -73,7 +68,7 @@ def rec_search(data_list, i, j):
     # set tally for successful searches
     tally = 0
 
-    # check serounding characters for the next charater in the target set
+    # check serounding characters for the next charater in the target set if the correct character is found incriment the counter
     seround = serounding(data_list, i, j)
     for k in range(len(seround)):
         counter = 1
@@ -81,9 +76,6 @@ def rec_search(data_list, i, j):
             counter += 1
 
             # search in desired direction starting at i, j and proceeding in x, y direction
-            print(seround[k], data_list[i][j], i, j)
-            print(seround[k][1], seround[k][2], seround[k][1] - i, seround[k][2] - j)
-#            breakpoint()
             if direct_search(data_list, seround[k][1], seround[k][2], seround[k][1] - i, seround[k][2] - j):
                 tally += 1
                 print(tally, "tally += 1")
@@ -91,10 +83,12 @@ def rec_search(data_list, i, j):
                 counter -= 1
 
 
+    # set counter to 0 and return tally
     counter = 0
     return tally
 
 
+# search function that recusively searches in the direction established by the first two characters
 def direct_search(data_list, i, j, x, y):
     
     # set global variables
@@ -107,24 +101,38 @@ def direct_search(data_list, i, j, x, y):
 
     # search for recursively search through all directions that an M was for
     elif data_list[i + x][j + y] == target[counter]:
+
+        # if the counter is at 3 then the correct word has been found return True
         if counter == 3:
-            print(target[counter], counter, i + x, j + y)
             return True
+
+        # if the counter is not at three increment the counter and recursively search with this function
         else:
-            print(target[counter], counter, i + x, j + y)
             counter += 1
             return direct_search(data_list, i + x, j + y, x, y)	
+
+    # if the above two statements are false then the string does not contain xmas
     else:
         return False
 
-def serounding(test_list, x, y):
+def serounding(data_list, i, j):
+
+    # create empty list
     serounding = []
-    for i in range(3):
-        one = ( x - 1 ) + i
-        for j in range(3):
-            two = ( y - 1 ) + j
-            if 0 <= one <= len(test_list) - 1 and 0 <= two <= len(test_list[x]) - 1:
-                serounding.append([test_list[one][two], one, two])
+
+    # loop through all positions around the given location in the matrix
+    for x in range(3):
+        calumn = ( i - 1 ) + x
+        for y in range(3):
+            row = ( j - 1 ) + y
+
+            # check if the given location is outside of the matrix
+            if 0 <= calumn <= len(data_list) - 1 and 0 <= row <= len(data_list[x]) - 1:
+
+                # if the location exists append it to seround in format [value, calumn, row]
+                serounding.append([data_list[calumn][row], column, row])
+
+    # return serounding values
     return serounding
 
 
