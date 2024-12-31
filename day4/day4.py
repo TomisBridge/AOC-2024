@@ -1,3 +1,5 @@
+#import pdb
+
 # set global target and counter variables
 global counter
 counter = 0
@@ -7,6 +9,7 @@ target = ['X', 'M', 'A', 'S']
 def main():
 
     # import data specified file
+#    breakpoint()
     target_file = input("input: ")
     data = format_AOC(target_file)
 
@@ -26,6 +29,7 @@ def main():
     # search all combinations char and search for X's
     for i in range(len(data_list)):
         for j in range(len(data_list[i])):
+#            breakpoint()
             xmas_count += search(data_list, i, j)
             print(i, j, xmas_count)
 
@@ -72,12 +76,14 @@ def rec_search(data_list, i, j):
     # check serounding characters for the next charater in the target set
     seround = serounding(data_list, i, j)
     for k in range(len(seround)):
+        counter = 1
         if seround[k][0] == target[counter]:
             counter += 1
 
             # search in desired direction starting at i, j and proceeding in x, y direction
             print(seround[k], data_list[i][j], i, j)
             print(seround[k][1], seround[k][2], seround[k][1] - i, seround[k][2] - j)
+#            breakpoint()
             if direct_search(data_list, seround[k][1], seround[k][2], seround[k][1] - i, seround[k][2] - j):
                 tally += 1
                 print(tally, "tally += 1")
@@ -103,7 +109,6 @@ def direct_search(data_list, i, j, x, y):
     elif data_list[i + x][j + y] == target[counter]:
         if counter == 3:
             print(target[counter], counter, i + x, j + y)
-            counter = 1
             return True
         else:
             print(target[counter], counter, i + x, j + y)
