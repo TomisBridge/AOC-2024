@@ -25,7 +25,6 @@ def format_AOC_day2(target_file):
 
     #import data and store it in data as a str
     my_file = open(target_file, "r")
-    data = []
     data = my_file.read()
 
     # split data into a single list splitting at \n and removing spaces

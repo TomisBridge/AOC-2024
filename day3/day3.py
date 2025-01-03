@@ -31,7 +31,6 @@ def format_AOC_day3(target_file):
 
     #import data and store it in data as a str
     my_file = open(target_file, "r")
-    data = []
     data = my_file.read()
 
 

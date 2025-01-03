@@ -10,8 +10,6 @@ def main():
     target_file = input("input: ")
     data = format_AOC(target_file)
 
-    print(data)
-
     # split data at \n to create a grid
     data_list = data.split("\n")
     data_list.pop(len(data_list) - 1)
@@ -27,10 +25,9 @@ def main():
     for i in range(len(data_list)):
         for j in range(len(data_list[i])):
             xmas_count += search(data_list, i, j)
-            print(i, j, xmas_count)
 
     # print answer
-    print(xmas_count)
+    print("\n----------> The data set contains", xmas_count, "XMAS's <----------\n")
 	
 def format_AOC(target_file):
 
@@ -44,6 +41,7 @@ def format_AOC(target_file):
 
     return data
 
+# check if input location contains an X and search for MAS using rec_search
 def search(data_list, i, j):
 
     # initiate global counter variable
@@ -59,6 +57,7 @@ def search(data_list, i, j):
     return False
 
 
+# search serounding locations for M and when found use direct_search (disrectional search) to check for AS
 def rec_search(data_list, i, j):
 
     # setting global target tnad counter variables
@@ -78,7 +77,6 @@ def rec_search(data_list, i, j):
             # search in desired direction starting at i, j and proceeding in x, y direction
             if direct_search(data_list, seround[k][1], seround[k][2], seround[k][1] - i, seround[k][2] - j):
                 tally += 1
-                print(tally, "tally += 1")
             else:
                 counter -= 1
 
@@ -122,15 +120,15 @@ def serounding(data_list, i, j):
 
     # loop through all positions around the given location in the matrix
     for x in range(3):
-        calumn = ( i - 1 ) + x
+        column = ( i - 1 ) + x
         for y in range(3):
             row = ( j - 1 ) + y
 
             # check if the given location is outside of the matrix
-            if 0 <= calumn <= len(data_list) - 1 and 0 <= row <= len(data_list[x]) - 1:
+            if 0 <= column <= len(data_list) - 1 and 0 <= row <= len(data_list[x]) - 1:
 
                 # if the location exists append it to seround in format [value, calumn, row]
-                serounding.append([data_list[calumn][row], column, row])
+                serounding.append([data_list[column][row], column, row])
 
     # return serounding values
     return serounding
