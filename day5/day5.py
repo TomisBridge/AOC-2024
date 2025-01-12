@@ -2,8 +2,9 @@ import sys
 import safe_IO
 import re
 
+
 def main():
-    
+
     # import data from user specified file
     rules = safe_IO.safe_get("rules: ", safe_IO.format_rules)
     if rules == "q":
@@ -14,12 +15,12 @@ def main():
     if rules == "q":
         sys.exit("\n ---------- Program ended ---------- \n")
 
-       
     pass_list = []
     for update in updates:
         if if_used(rules, update):
-            pass_list.append(update[int(len(update)/2)])
+            pass_list.append(update[int(len(update) / 2)])
     print(sum(pass_list))
+
 
 def if_used(rules, update):
     update_str = " ".join(map(str, update))

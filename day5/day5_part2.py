@@ -2,8 +2,9 @@ import sys
 import safe_IO
 import re
 
+
 def main():
-    
+
     # import data from user specified file
     rules = safe_IO.safe_get("rules: ", safe_IO.format_rules)
     if rules == "q":
@@ -16,7 +17,7 @@ def main():
 
     # itterate all rules through all list. if update modified append to end of list and replace with []
 
-    #set variable
+    # set variable
     fail_list = updates
     list_len = len(updates)
     counter = 0
@@ -26,14 +27,14 @@ def main():
     for update in fail_list:
         counter += 1
         change = 0
-        
-        #itterate through rules
+
+        # itterate through rules
         for rule in rules:
 
             # if the update failes the rule swap the two items and append to end of list
             if if_used(rule, update):
                 fail_list[fail_list.index(update)] = [0]
-                fail_list.append(swap(rule, update)) 
+                fail_list.append(swap(rule, update))
                 change += 1
 
         # if there are been not modification done to the update then replace it with []
@@ -43,10 +44,11 @@ def main():
     # create a list of the middle number of all list items
     pass_list = []
     for update in fail_list:
-        pass_list.append(update[int(len(update)/2)])
-    
+        pass_list.append(update[int(len(update) / 2)])
+
     # print the sum of the pass_list items
     print(sum(pass_list))
+
 
 # check if the update fails the rule
 def if_used(rule, update):
@@ -56,9 +58,14 @@ def if_used(rule, update):
         return True
     return False
 
+
 # swap the two impropperly ordered update entries
 def swap(rule, update):
-    update[update.index(rule[0])], update[update.index(rule[1])] = update[update.index(rule[1])], update[update.index(rule[0])]
+    update[update.index(rule[0])], update[update.index(rule[1])] = (
+        update[update.index(rule[1])],
+        update[update.index(rule[0])],
+    )
     return update
+
 
 main()
