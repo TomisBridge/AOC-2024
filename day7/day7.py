@@ -1,3 +1,10 @@
+#
+# Find properly commented code in day7_part2.py
+#      changes are opt: [add, mul] -> [add, mul, con]
+#                       base_to new_base 2 -> 3
+#                       recursive depth 4096 -> 4782968
+#
+
 import sys
 from operator import add, sub, mul, truediv
 from safe_IO import safe_get
@@ -29,12 +36,10 @@ def opt_check(test, lst, itter):
 
     global opt
 
-    #print("call base_to")
     comb = list(map(int, str(base_to(itter, 2))))
     while len(comb) != len(lst) - 1:
         comb = [0] + comb
     
-    #print(comb)
     lst1 = lst[0]
     for i in range(len(comb)):
         lst1 = opt[comb[i]](lst1, lst[i + 1])
@@ -49,7 +54,6 @@ def opt_check(test, lst, itter):
 def base_to(base_10, new_base):
     quotient = base_10 // new_base
     remainder = base_10 % new_base
-    #print(base_10, quotient, remainder)
     if quotient == 0:
         return remainder
     return int(str(base_to(quotient, new_base)) + str(remainder))
