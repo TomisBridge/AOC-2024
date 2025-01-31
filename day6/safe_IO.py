@@ -8,7 +8,7 @@ def safe_get(target):
     except ValueError:
         print("\n ---------- please input file type .txt ---------- \n")
     except FileNotFoundError:
-        print("\n ---------- please input file name from the same folder as this program ---------- \n")
+        print("\n ---------- please input file name from the same folder as this program ----------\n")
     except:
         print("\n ---------- Unkown error ----------- \n")
     else:
@@ -25,19 +25,11 @@ def format_target(target_file):
     data_list = data.split("\n")
 
     # split into sublists at | 
-    """
     data_lists = []
     for item in data_list:
         if item != "": # eliminate empty lists
-            data_lists.append(item.split("|"))
-    """
-
-    """
-    int_lists = []
-    for items in data_lists:
-         int_lists.append(list(map(int, items)))
-    """
+            data_lists.append(item)
 
     # return list of lists
-    return data_list
+    return data_lists
 
