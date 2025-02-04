@@ -1,4 +1,6 @@
 import sys
+"""    except:
+        print("\n ---------- Unkown error ----------- \n") """
 
 def safe_get(target):
 
@@ -9,8 +11,6 @@ def safe_get(target):
         print("\n ---------- please input file type .txt ---------- \n")
     except FileNotFoundError:
         print("\n ---------- please input file name from the same folder as this program ----------\n")
-    except:
-        print("\n ---------- Unkown error ----------- \n")
     else:
         return data
 
@@ -28,7 +28,7 @@ def format_target(target_file):
     data_lists = []
     for item in data_list:
         if item != "": # eliminate empty lists
-            data_lists.append(item)
+            data_lists.append(list(item))
 
     # return list of lists
     return data_lists

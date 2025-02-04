@@ -1,0 +1,59 @@
+>>> a = ["a", "b", "c"]
+>>> b = ["d", "e", "f"]
+>>> c = ["g", "h", "i"]
+>>> m1 = [a, b, c]
+>>> m2 = [b, c, a]
+>>> m3 = [c, b, a]
+>>> m1
+[['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i']]
+>>> m2
+[['d', 'e', 'f'], ['g', 'h', 'i'], ['a', 'b', 'c']]
+>>> m3
+[['g', 'h', 'i'], ['d', 'e', 'f'], ['a', 'b', 'c']]
+>>> cube = [m1, m2, m3]
+>>> cube
+[[['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i']], [['d', 'e', 'f'], ['g', 'h', 'i'], ['a', 'b', 'c']], [['g', 'h', 'i'], ['d', 'e', 'f'], ['a', 'b', 'c']]]
+>>> m1 == m2
+False
+>>> map(== m1, cube)
+  File "<stdin>", line 1
+    map(== m1, cube)
+        ^^
+SyntaxError: invalid syntax
+>>> def f(x):
+...
+...
+  File "<stdin>", line 3
+
+    ^
+IndentationError: expected an indented block after function definition on line 1
+>>> map(m1 ==, cube)
+  File "<stdin>", line 1
+    map(m1 ==, cube)
+             ^
+SyntaxError: invalid syntax
+>>> list(map(== m1, cube))
+  File "<stdin>", line 1
+    list(map(== m1, cube))
+             ^^
+SyntaxError: invalid syntax
+>>> list(map(lanmbda n: n == m1, cube))
+  File "<stdin>", line 1
+    list(map(lanmbda n: n == m1, cube))
+             ^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+>>> list(map(lambda n: n == m1, cube))
+[True, False, False]
+>>> bool_list = list(map(lambda n: n == m1, cube))
+>>> bool_list
+[True, False, False]
+>>> and(bool_list)
+  File "<stdin>", line 1
+    and(bool_list)
+    ^^^
+SyntaxError: invalid syntax
+>>> all(bool_list)
+False
+>>> any(bool_list)
+True
+>>>
