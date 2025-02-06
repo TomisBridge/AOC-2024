@@ -1,6 +1,7 @@
 from safe_IO import safe_get 
 from re import search
 from my_map import a_map, position
+from copy import deepcopy, copy
 import sys
 
 def main():
@@ -50,22 +51,19 @@ def find_gaurd(lab_map):
     return [-1, -1]
 
 def loop_check(gaurd):
-    ghost = position(gaurd.grid, gaurd.direction, gaurd.x, gaurd.y)
-    ghost.turn()
-    brick = 0
+    ghost = position(deepcopy(gaurd.grid), copy(gaurd.direction), copy(gaurd.x), copy(gaurd.y))
+    ghost.block(ghost.nextp())
     while True:
         if not(ghost.in_map(ghost.nextp())): 
             break
-        elif brick > 100:
-            break
-        elif not(ghost.at_location(ghost.nextp())) != "#":
-            brick += 1
+        elif ghost.at_location(ghost.nextp()).find("#") > 0:
             ghost.turn()
         else:
             if ghost.at_location(ghost.nextp()).find(ghost.direction) > 0:
                 del ghost
                 return True
             ghost.move()
+            ghost.mark()
     del ghost
     return False
 
