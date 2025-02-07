@@ -20,6 +20,7 @@ def main():
 
     for i in range(len(lab_map)):
         for j in range(len(lab_map[i])):
+            print(f"{ i * j } / {len(lab_map) * len(lab_map[0])}")
 
             gaurd = position(deepcopy(lab_map), copy(lab_map[gaurdxy[0]][gaurdxy[1]]), copy(gaurdxy[0]), copy(gaurdxy[1]))
             gaurd.block([i, j])

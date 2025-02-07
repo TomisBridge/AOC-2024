@@ -58,12 +58,13 @@ def loop_check(gaurd):
             break
         elif ghost.at_location(ghost.nextp()).find("#") > 0:
             ghost.turn()
+        elif ghost.at_location(ghost.nextp()).find(ghost.direction) > 0:
+            del ghost
+            return True
         else:
-            if ghost.at_location(ghost.nextp()).find(ghost.direction) > 0:
-                del ghost
-                return True
             ghost.move()
             ghost.mark()
+
     del ghost
     return False
 
