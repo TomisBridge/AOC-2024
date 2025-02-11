@@ -1,7 +1,7 @@
 import sys
 import time
 from safe_IO import safe_get
-from compressor import data_list
+from compressor2 import data_list
 
 start_time = time.time()
 
@@ -20,6 +20,7 @@ def main():
         toggle()
 
     comp_obj = data_list(uncompressed, 0, len(uncompressed) - 1)
+    print(comp_obj.data)
 
     counter = 0
     while True:
@@ -48,12 +49,12 @@ def check_sum(data):
         
 def file_length(input_number):
     global current_block
-    compression = [str(current_block)] * input_number
+    compression = [str(current_block) * input_number]
     current_block += 1
     return compression
 
 def free_space(input_number):
-    return ["."] * input_number
+    return ["." * input_number]
 
 def toggle():
     global flip_flop
