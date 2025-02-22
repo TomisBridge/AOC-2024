@@ -5,26 +5,37 @@ class data_list():
         self.end = end
 
     def swap(self):
-        if len(self.start)
         first = self.data[self.start]
         self.data = self.data[:self.start] + [self.data[self.end]] + self.data[self.start + 1:] 
         self.data = self.data[:self.end] + [first] + self.data[self.end + 1:] 
 
-    def move(self, target):
-        if target == "start":
-            self.start += 1
-        elif target == "end":
-            self.end -= 1
+    def mel(self):
+        self.end += -1
+
+    def mer(self):
+        self.end += 1
+        
+    def msl(self):
+        self.start += -1
+        
+    def msr(self):
+        self.start += 1
 
     def at(self, target):
-        return self.dat[target]
+        return self.data[target]
+    
+    def breakup(self):
 
-    def breakup(self, string, i):
-        strings = [string[:i], string[i:]]
+        end_len = len(self.data[self.end]) - 1
+        start_len = len(self.data[self.start]) - 1
 
-        def insall(self, break_string):
-            for i in range(len(break_string)):
-                new_start = self.data[:self.start - 1].append(break_string[i])
-            return new_start
+        if end_len < start_len:
+            strings = [self.data[self.start][:end_len], self.data[self.start][end_len:]]
 
+            new_start = self.data[:self.start]
+
+            for i in range(len(strings), 0, -1):
+                new_start.append(strings[i - 1])
+
+            self.data = new_start + (self.data[self.start + 1:])
 

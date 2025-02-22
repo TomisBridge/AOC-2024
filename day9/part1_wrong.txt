@@ -1,1 +1,1 @@
-91486187825 too low
+91486187825 too low <- because I parsed the data as a single string the program couldnt handle 2 digit number. fixed by using lists of strings.

@@ -20,6 +20,8 @@ def main():
         toggle()
 
     comp_obj = data_list(uncompressed, 0, len(uncompressed) - 1)
+    print(data)
+    print(comp_obj.data)
 
     counter = 0
     while True:
