@@ -1,9 +1,13 @@
 import sys
+import time
 from operator import add, mul, concat, truediv, sub
 from base_change import base_to, to_10
 from safe_IO import safe_get
 
 def main():
+
+    #track the time the code take to run
+    start_time = time.time()
 
     # check for correct usage and import/format data
     if len(sys.argv) < 3:
@@ -44,7 +48,10 @@ def main():
             print(" False")
 
     # print answer
-    print(sum(correct))
+    print("\n ----------- check sume total: ", sum(correct), " ---------- ")
+
+    #print total time program was running
+    print("\n ---------- total time to complete: ", sub(time.time(), start_time), " ----------- \n")
 
 # test all possible combination of operators and return bool
 def opt_check(test, lst, itter):

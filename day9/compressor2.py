@@ -26,15 +26,15 @@ class data_list():
     
     def breakup(self):
 
-        end_len = len(self.data[self.end]) - 1
-        start_len = len(self.data[self.start]) - 1
+        end_len = len(self.data[self.end])
+        start_len = len(self.data[self.start])
 
         if end_len < start_len:
-            strings = [self.data[self.start][:end_len], self.data[self.start][end_len:]]
+            strings = [self.data[self.start][end_len:], self.data[self.start][:end_len]]
 
             new_start = self.data[:self.start]
 
-            for i in range(len(strings), 0, -1):
+            for i in range(len(strings)):
                 new_start.append(strings[i - 1])
 
             self.data = new_start + (self.data[self.start + 1:])

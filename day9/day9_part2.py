@@ -27,17 +27,10 @@ def main():
 
     comp_obj = data_list(uncompressed, 0, len(uncompressed) - 1)
 
-    for i in range(1, 50):
-        print(comp_obj.data[i])
-
-    for i in range(1, 50):
-        print(comp_obj.data[len(comp_obj.data) - i])
-
-
     while comp_obj.end > 0:
-        print(comp_obj.at(comp_obj.start), comp_obj.at(comp_obj.end))
+        #print(comp_obj.at(comp_obj.start), comp_obj.at(comp_obj.end))
         if comp_obj.end % 10 == 0:
-            print(comp_obj.end, end="\r")
+            print(comp_obj.end, "     ", end="\r")
         if comp_obj.at(comp_obj.end)[0] != ".":
             push_back(comp_obj)
             comp_obj.mel()
@@ -49,13 +42,13 @@ def main():
         compressed += item
 
     chum = check_sum(compressed)
-    print("")
-    print(chum)
 
-    print(f" ----- {time.time() - start_time} seconds ----- ")
+    print(f" \n ---------- checksum total: {chum} ----------- \n")
+
+    print(f" ---------- {time.time() - start_time} seconds ---------- \n")
   
 def push_back(obj):
-    print("\n start: ", obj.start, "\n end: ", obj.end, "\n ", obj.at(obj.start))
+    #print("\n start: ", obj.start, "\n end: ", obj.end, "\n ", obj.at(obj.start))
     
     if obj.start >= obj.end:
         #print(obj.data, "\n start: ", obj.start, "\n end: ", obj.end, "\n 1")

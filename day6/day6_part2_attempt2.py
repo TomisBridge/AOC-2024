@@ -20,10 +20,12 @@ def main():
 
     for i in range(len(lab_map)):
         for j in range(len(lab_map[i])):
-            print(f"{ i * j } / {len(lab_map) * len(lab_map[0])}")
+            if j == len(lab_map[i]) - 1:
+                print(f"{ i * j } / {len(lab_map) * len(lab_map[0])}", end="\r")
 
             gaurd = position(deepcopy(lab_map), copy(lab_map[gaurdxy[0]][gaurdxy[1]]), copy(gaurdxy[0]), copy(gaurdxy[1]))
-            gaurd.block([i, j])
+            if [i, j] != gaurdxy:
+                gaurd.block([i, j])
 
             while True:
                 
@@ -46,6 +48,7 @@ def main():
                     gaurd.move()
                     gaurd.mark()
                     
+    print("")
     print(loops)
 
 # find the gaurd return [-1, -1] if the gaurd cannot be found

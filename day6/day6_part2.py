@@ -1,4 +1,4 @@
-from safe_IO import safe_get 
+from safe_IO import safe_get, dump_info
 from re import search
 from my_map import a_map, position
 from copy import deepcopy, copy
@@ -22,6 +22,7 @@ def main():
 
     loops = 0
     test = 0
+    global grid_loop
     grid_loop = []
 
     while True:
@@ -33,14 +34,14 @@ def main():
             gaurd.turn()
             gaurd.mark()
         else:
-            if loop_check(gaurd):
+            if loop_check(gaurd) and gaurd.nextp() != gaurdxy:
                 loops += 1
             gaurd.move()
             gaurd.mark()
 
     gaurd.print_map()
     print(loops)
-    
+    dump_info(grid_loop)
 
 # find the gaurd return [-1, -1] if the gaurd cannot be found
 def find_gaurd(lab_map):
@@ -51,6 +52,8 @@ def find_gaurd(lab_map):
     return [-1, -1]
 
 def loop_check(gaurd):
+    global grid_loop
+
     ghost = position(deepcopy(gaurd.grid), copy(gaurd.direction), copy(gaurd.x), copy(gaurd.y))
     ghost.block(ghost.nextp())
     while True:
@@ -59,6 +62,7 @@ def loop_check(gaurd):
         elif ghost.at_location(ghost.nextp()).find("#") > 0:
             ghost.turn()
         elif ghost.at_location(ghost.nextp()).find(ghost.direction) > 0:
+            grid_loop.append(ghost.grid)
             del ghost
             return True
         else:
