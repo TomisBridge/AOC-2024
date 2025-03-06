@@ -10,6 +10,8 @@ def main():
     gaurd = position(lab_map, lab_map[gaurdxy[0]][gaurdxy[1]], gaurdxy[0], gaurdxy[1])
 
     print(gaurd.in_map([-1, -1]))
+
+    number = 0
     
     while True:
         key_input = input("command: ")
@@ -30,6 +32,10 @@ def main():
             print(gaurd.nextp())
         if key_input == "in_map":
             print(gaurd.in_map(gaurd.nextp()))
+        if key_input == "write":
+            number += 1
+            with open(f"map{number}.txt", "w") as f:
+                f.write(gaurd.grid)
         if key_input == "q":
             break
 

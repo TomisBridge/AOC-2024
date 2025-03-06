@@ -52,7 +52,7 @@ class position(a_map):
             return True
 
     def block(self, target):
-        self.grid[target[0]][target[1]] += "#"
+        self.grid[target[0]][target[1]] = "#"
             
     def mark(self):
         self.grid[self.x][self.y] += self.direction
